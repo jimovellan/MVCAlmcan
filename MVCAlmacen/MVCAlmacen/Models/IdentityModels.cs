@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MVCAlmacen.Models.Masters;
 
 namespace MVCAlmacen.Models
 {
@@ -16,10 +17,17 @@ namespace MVCAlmacen.Models
             // Agregar aquí notificaciones personalizadas de usuario
             return userIdentity;
         }
+
+        public bool Active { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        #region DBSET's
+        public DbSet<Company> Company { get; set; }
+        public DbSet<Warehouse> Warehouse { get; set; }
+        #endregion
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
